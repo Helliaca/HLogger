@@ -69,6 +69,11 @@ namespace HLogger
             }
         }
 
+        public static string SystemTimeStr()
+        {
+            return System.DateTime.Now.ToString("dd_MM_yyyy__HH_mm_ss");
+        }
+
         ~Logger()
         {
             Close();
