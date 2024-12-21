@@ -8,8 +8,6 @@ namespace HLogger
 {
     public class Logger
     {
-        const string filepath = "logs/";
-
         const string delimeter = ";";
 
         private readonly StreamWriter file;
@@ -22,7 +20,7 @@ namespace HLogger
 
         public Logger(string filename, params string[] headers)
         {
-            string path = filepath + filename;
+            string path = filename;
             string folder = new FileInfo(path).Directory.FullName;
 
             buffer = new StringBuilder();
@@ -50,6 +48,21 @@ namespace HLogger
             {
                 buffer.Append(System.Convert.ToString(o, System.Globalization.CultureInfo.InvariantCulture) + delimeter);
             }
+        }
+
+        public void LogLine(object o)
+        {
+            buffer.Append(System.Convert.ToString(o, System.Globalization.CultureInfo.InvariantCulture) + delimeter);
+            EndLine();
+        }
+
+        public void LogLine(params object[] os)
+        {
+            foreach (object o in os)
+            {
+                buffer.Append(System.Convert.ToString(o, System.Globalization.CultureInfo.InvariantCulture) + delimeter);
+            }
+            EndLine();
         }
 
         public void EndLine()
